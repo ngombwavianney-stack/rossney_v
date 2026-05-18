@@ -1,0 +1,82 @@
+<?php
+
+$conn = mysqli_connect("localhost","root","","weather_db");
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>weather Detection Dashboard</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    padding:20px;
+}
+
+table{
+    width:100%;
+    border-collapse: collapse;
+    background:white;
+}
+
+table th, table td{
+    border:1px solid #000;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background:blue;
+    color:white;
+}
+
+h1{
+    text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Weather Detection Dashboard</h1>
+
+<table>
+
+<tr>
+    <th>ID</th>
+    <th>temperature</th>
+    <th>humidity</th>
+    <th>Timestamp</th>
+</tr>
+
+<?php
+
+$query = mysqli_query($conn,
+"SELECT * FROM weather_data ORDER BY Id DESC");
+
+while($row = mysqli_fetch_assoc($query)){
+
+?>
+
+<tr>
+<tr>
+    <td><?php echo $row['ID']; ?></td>
+    <td><?php echo $row['temperature']; ?></td>
+       <td><?php echo $row['humidity']; ?></td>
+    <td><?php echo $row['timestamp']; ?></td>
+</tr>
+</tr>
+
+<?php } ?>
+
+</table>
+
+</body>
+</html>
